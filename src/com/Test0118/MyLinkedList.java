@@ -82,13 +82,52 @@ public class MyLinkedList {
         }
         return false;
     };
+
+
+    private Node searchPre(int key){
+        Node pre = this.head;
+        while (pre.next != null){
+            if (pre.next.data == key){
+                return pre;
+            }
+            pre = pre.next;
+        }
+        return null;
+    }
     //删除第一次出现关键字为key的节点
     public void remove(int key){
-
+        if (this.head == null){
+            System.out.println("链表为空");
+            return;
+        }
+        if (this.head.data == key){
+            this.head = this.head.next;
+            return;
+        }
+        Node pre = searchPre(key);
+        if (pre == null){
+            System.out.println("没有这个节点");
+            return;
+        }
+        Node cur = pre.next;
+        pre.next = cur.next;
     };
     //删除所有值为key的节点
     public void removeAllKey(int key){
-
+        Node pre = this.head;
+        Node cur = pre.next;
+        while (cur != null){
+            if (cur.data == key){
+                pre.next = cur.next;
+                cur = cur.next;
+            }else {
+                pre = cur;
+                cur = cur.next;
+            }
+        }
+        if (this.head.data == key){
+            this.head = this.head.next;
+        }
     };
     //得到单链表的长度
     public int size(){

@@ -74,6 +74,9 @@ public class MyLinkedList {
             System.out.println("不存在该节点");
             return;
         }
+        if (this.head == null){
+            return;
+        }
         Node cur = this.head.next;
         Node pre = this.head;
         if (pre.data == key){
@@ -127,7 +130,54 @@ public class MyLinkedList {
         }
         System.out.println();
     };
+
+    public void display2(Node newHead){
+        Node cur = newHead;
+        while (cur != null){
+            System.out.printf(cur.data + " ");
+            cur = cur.next;
+        }
+        System.out.println();
+    }
     public void clear(){
         this.head = null;
     };
+
+    /**
+     * 反转链表
+     * @return
+     */
+    public Node reverseList(){
+        Node cur = this.head;
+        Node newHead = null;
+        Node pre = null;
+        while (cur != null){
+            Node curNext = cur.next;
+            if (curNext == null){
+                newHead = cur;
+            }
+            cur.next = pre;
+            pre = cur;
+            cur = curNext;
+        }
+        return newHead;
+    }
+
+    /**
+     * 找到单链表的中间节点
+     * @param
+     * @return
+     */
+    public Node middleNode() {
+        if (head == null){
+            return null;
+        }
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
 }
