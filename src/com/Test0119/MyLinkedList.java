@@ -270,4 +270,24 @@ public class MyLinkedList {
         }
         return bs;
     }
+
+    public Node deleteDuplication(Node pHead){
+        Node newHead = new Node(-1);
+        Node tmp = newHead;
+        Node cur = pHead;
+        while (cur != null){
+            if (cur.next != null && cur.data == cur.next.data){
+                while (cur.next != null && cur.data == cur.next.data){
+                    cur = cur.next;
+                }
+                cur = cur.next;
+            }else {
+                tmp.next = cur;
+                tmp = tmp.next;
+                cur = cur.next;
+            }
+        }
+        tmp.next = null;
+        return newHead.next;
+    }
 }
