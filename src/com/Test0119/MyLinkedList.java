@@ -134,7 +134,7 @@ public class MyLinkedList {
     public void display2(Node newHead){
         Node cur = newHead;
         while (cur != null){
-            System.out.printf(cur.data + " ");
+            System.out.print(cur.data + " ");
             cur = cur.next;
         }
         System.out.println();
@@ -179,5 +179,95 @@ public class MyLinkedList {
             slow = slow.next;
         }
         return slow;
+    }
+
+    /**
+     * 倒数第K个节点
+     * @param
+     * @param k
+     * @return
+     */
+    public Node FindKthToTail(int k){
+        if(k <= 0 || this.head == null){
+            throw new RuntimeException("k位置不合法");
+        }
+        Node fast = this.head;
+        Node slow = this.head;
+        while (k - 1 != 0){
+            fast = fast.next;
+            k--;
+            if (fast == null){
+                return null;
+            }
+        }
+        while (fast.next != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+    /**
+     * 合并两个链表
+     */
+    public Node mergeTwoLists(Node list1, Node list2){
+        Node newHead  = new Node(-1);
+        Node tmp = newHead;
+        while (list1 != null && list2 != null){
+            if (list1.data > list2.data){
+                tmp.next = list2;
+                list2 = list2.next;
+                tmp = tmp.next;
+            }else {
+                    tmp.next = list1;
+                    list1 = list1.next;
+                    tmp = tmp.next;
+            }
+        }
+        if (list1 != null){
+            tmp.next = list1;
+        }else if (list2 != null){
+            tmp.next = list2;
+        }
+
+        return newHead.next;
+    }
+    /**
+     * 链表分割
+     */
+    public Node partition(Node pHead, int x){
+        Node be = null;
+        Node bs = null;
+        Node ae = null;
+        Node as = null;
+        Node cur = pHead;
+        while (cur != null){
+            if (cur.data < x){
+                if (bs == null){
+                    bs = cur;
+                    be = cur;
+                }else {
+                    be.next = cur;
+                    be = be.next;
+                }
+            }else {
+                if (as == null){
+                    as = cur;
+                    ae = cur;
+                }else {
+                    ae.next = cur;
+                    ae = ae.next;
+                }
+
+            }
+            cur = cur.next;
+        }
+        if (be == null){
+            return as;
+        }
+        be.next = as;
+        if (as != null){
+            ae.next = null;
+        }
+        return bs;
     }
 }
