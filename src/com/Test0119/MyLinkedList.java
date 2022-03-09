@@ -290,4 +290,44 @@ public class MyLinkedList {
         tmp.next = null;
         return newHead.next;
     }
+
+    public static Node getIntersectionNode(Node headA, Node headB){
+        if (headA == null || headB == null){
+            return null;
+        }
+        Node pl = headA;
+        Node ps = headB;
+        int lenA = 0;
+        int lenB = 0;
+        int len = 0;
+        while (pl != null){
+            lenA++;
+            pl = pl.next;
+        }
+        pl = headA;
+        while (ps != null){
+            lenB++;
+            ps = ps.next;
+        }
+        ps = headB;
+        len = lenA - lenB;
+        if (len < 0 ){
+            ps = headA;
+            pl = headB;
+            len = lenB - lenA;
+        }
+        while (len != 0){
+            pl = pl.next;
+            len--;
+        }
+        while (pl != null){
+            if (pl == ps){
+                return  ps;
+            }
+            pl = pl.next;
+            ps = ps.next;
+        }
+        return null;
+    }
+
 }

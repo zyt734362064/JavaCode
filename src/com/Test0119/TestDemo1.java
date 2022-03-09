@@ -35,7 +35,49 @@ public class TestDemo1 {
         }
         return newHead.next;
     }
+    public static Node getIntersectionNode(Node headA, Node headB){
+        if (headA == null || headB == null){
+            return null;
+        }
+        Node pl = headA;
+        Node ps = headB;
+        int lenA = 0;
+        int lenB = 0;
+        int len = 0;
+        while (pl != null){
+            lenA++;
+            pl = pl.next;
+        }
+        pl = headA;
+        while (ps != null){
+            lenB++;
+            ps = ps.next;
+        }
+        ps = headB;
+        len = lenA - lenB;
+        if (len < 0 ){
+            ps = headA;
+            pl = headB;
+            len = lenB - lenA;
+        }
+        while (len != 0){
+            pl = pl.next;
+            len--;
+        }
+        while (pl != null){
+            if (pl == ps){
+                return  ps;
+            }
+            pl = pl.next;
+            ps = ps.next;
+        }
+        return null;
+    }
+    public static void createCut(Node headA,Node headB){
+        headA.next.next = headB.next.next;
+    }
     public static void main(String[] args) {
+
         MyLinkedList myLinkedList = new MyLinkedList();
         MyLinkedList myLinkedList1 = new MyLinkedList();
         //myLinkedList1.addFirst(98);
@@ -45,10 +87,10 @@ public class TestDemo1 {
         myLinkedList1.addLast(29);
         myLinkedList1.addLast(29);
         myLinkedList1.addLast(40);
-        myLinkedList1.addLast(79);
-        myLinkedList1.addLast(92);
-        myLinkedList1.addLast(92);
-        myLinkedList1.addLast(92);
+        myLinkedList.addLast(79);
+        myLinkedList.addLast(92);
+        myLinkedList.addLast(92);
+        myLinkedList.addLast(92);
         //myLinkedList.display();
         //myLinkedList.addIndex(0,99);
         //myLinkedList.addIndex(4,99);
@@ -57,16 +99,24 @@ public class TestDemo1 {
         //System.out.println(myLinkedList.contains(99));
         //System.out.println("-------删除99后---------");
         //myLinkedList.display();
-        myLinkedList1.display();
+        //myLinkedList1.display();
         //myLinkedList.clear();
         //System.out.println("-------全部清除后--------");
         //myLinkedList.display();
         //myLinkedList.display2(myLinkedList.reverseList());
         //System.out.println(myLinkedList.FindKthToTail(5).data);
-        System.out.println("//////////分割///////////");
+       // System.out.println("//////////分割///////////");
         //Node tmp = myLinkedList.partition(myLinkedList1.head,40);
         //myLinkedList.display2(tmp);
-        Node tmp = myLinkedList1.deleteDuplication(myLinkedList1.head);
-        myLinkedList1.display2(tmp);
+        //Node tmp = myLinkedList1.deleteDuplication(myLinkedList1.head);
+        //myLinkedList1.display2(tmp);
+
+
+        createCut(myLinkedList.head,myLinkedList1.head);
+        Node ret = getIntersectionNode(myLinkedList.head,myLinkedList1.head);
+        myLinkedList.display();
+        myLinkedList1.display();
+        System.out.println(ret.data);
+
     }
 }
