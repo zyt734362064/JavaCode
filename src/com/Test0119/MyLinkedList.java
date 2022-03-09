@@ -291,7 +291,7 @@ public class MyLinkedList {
         return newHead.next;
     }
 
-    public static Node getIntersectionNode(Node headA, Node headB){
+    /*public static Node getIntersectionNode(Node headA, Node headB){
         if (headA == null || headB == null){
             return null;
         }
@@ -328,6 +328,27 @@ public class MyLinkedList {
             ps = ps.next;
         }
         return null;
-    }
+    }*/
 
+    /**
+     * 环形链表
+     * 给你一个链表的头节点 head ，判断链表中是否有环
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(Node head) {
+        if (head == null){
+            return false;
+        }
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow){
+                return true;
+            }
+        }
+        return false;
+    }
 }

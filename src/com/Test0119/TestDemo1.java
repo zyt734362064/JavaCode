@@ -113,10 +113,16 @@ public class TestDemo1 {
 
 
         createCut(myLinkedList.head,myLinkedList1.head);
-        Node ret = getIntersectionNode(myLinkedList.head,myLinkedList1.head);
         myLinkedList.display();
         myLinkedList1.display();
-        System.out.println(ret.data);
+        try{
+            Node ret = getIntersectionNode(myLinkedList.head,myLinkedList1.head);
+            System.out.println(ret.data);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            System.out.println("没有相交的节点!");
+        }
+
 
     }
 }
